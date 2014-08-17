@@ -5,26 +5,31 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="tiles.css">
-		<link rel="stylesheet" type="text/css" href="colours.css">
+		<link rel="stylesheet" type="text/css" href="tiler.css">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nunito:300,700">
+		
+		<script type="text/JavaScript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script type="text/JavaScript" src="tiler.js"></script>
 	</head>
 	<body>
-		<div class="wrapper">
-			<div class="row">
-				<div class="col-md-3 color-1 tile">
+		<table class="wrapper">
+			<tr>
+				<td class="tile tile-inactive color-0">
 					<span class="tile-title">Notes</span>
-				</div>
-				<div class="col-md-3 color-2 tile">
+				</td>
+				<td class="tile tile-inactive color-1">
 					<span class="tile-title">Notes</span>
-				</div>
-				<div class="col-md-3 color-3 tile">
+				</td>
+				<td class="tile tile-inactive color-2">
 					<span class="tile-title">Notes</span>
-				</div>
-				<div class="col-md-3 color-4 tile">
+				</td>
+				<td class="tile tile-inactive color-3">
 					<span class="tile-title">Notes</span>
-				</div>
+				</td>
+			</tr>
+			<div class="tile tile-inactive color-4 tile-add">
+				<span class="tile-title">+</span>
 			</div>
-		</div>
+		</table>
 	</body>
 </html>

@@ -1,0 +1,20 @@
+{
+	"title":	"textColors03",
+	"author":	"eugeniabr85",
+	"colors": [{
+		"bgColor":	"#FFFFCC",
+		"textColor":	"#6D6D6D"
+	},{
+		"bgColor":	"#F0FECE",
+		"textColor":	"#6D6D6D"
+	},{
+		"bgColor":	"#E96C8E",
+		"textColor":	"#EFEFEF"
+	},{
+		"bgColor":	"#8FE5DB",
+		"textColor":	"#F3F3F3"
+	},{
+		"bgColor":	"#3ED2C0",
+		"textColor":	"#FFFFFF"
+	}]
+}

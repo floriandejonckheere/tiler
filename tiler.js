@@ -23,10 +23,6 @@ var data = [{
 }];
 
 $(document).ready(function(){
-	Mousetrap.bind('c',	function(){
-		$('#css-palette').attr('href', 'colors/' + palettes[(++current % palettes.length)] + '.css');
-		$('#palette-author').show().fadeOut(2000);
-	});
 	$('#palette-author').fadeOut(2000);
 
 	/* Knockout stuff */
@@ -41,22 +37,55 @@ $(document).ready(function(){
 		var self = this;
 
 		self.tiles =	ko.observableArray();
-		self.active =	ko.observable(false);
+		self.active =	ko.observable(-1);
 
-		self.palette =	ko.observable();
-
-		self.load = function(data){
+		self.add = function(data){
 			$.each(data, function(index, value){
 				self.tiles.push(new Tile(value.title, value.text));
 			});
 		};
 
-		self.activate = function(index){
-			self.activate(index());
-		}
+		self.activate = function(element){
+			// This is not really good for performance
+			self.active(self.tiles.indexOf(element));
+		};
+
+		self.isActive = function(element){
+			if(self.tiles.indexOf(element) == self.active())
+				return true;
+			return false;
+		};
 	};
 
 	var tileViewModel = new TileViewModel();
-	tileViewModel.load(data);
+	tileViewModel.add(data);
 	ko.applyBindings(tileViewModel);
+
+	// For some reason the last panel is activated on load without this line
+	tileViewModel.activate(-1);
+
+	Mousetrap.bind('c',	function(){
+		if(tileViewModel.active() == -1){
+			$('#css-palette').attr('href', 'colors/' + palettes[(++current % palettes.length)] + '.css');
+			$('#palette-author').show().fadeOut(2000);
+		}
+	});
+
+	Mousetrap.bind('a',	function(){
+		if(tileViewModel.active() == -1){
+			var titles = ['Panel', 'Paper', 'Sheet'];
+			tileViewModel.add([{
+				"title":	titles[Math.floor(Math.random()*titles.length)],
+				"text":		""
+			}]);
+			// Same hack here
+			tileViewModel.active(-1);
+		}
+	});
+
+	// Overwrite callback when an input field is focused
+	Mousetrap.stopCallback = function(e, element, combo){ return false; };
+	Mousetrap.bind('esc',	function(){
+		tileViewModel.active(-1);
+	});
 });

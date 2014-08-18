@@ -29,7 +29,8 @@ table.wrapper {
 }
 
 table.wrapper td {
-	opacity:	0.8;
+	/*opacity:	0.8;*/
+	opacity:	1;
 }
 
 table.wrapper td:hover {
@@ -37,6 +38,9 @@ table.wrapper td:hover {
 }
 
 /* tiles */
+.tile {
+	height:		100%;
+}
 
 .animated {
 	transition:		all 0.5s ease;
@@ -46,34 +50,53 @@ table.wrapper td:hover {
 	-o-transition:		all 0.5s ease;
 }
 
-.tile-inactive {
-	width:		auto;
-}
-
-.tile-active {
-	width:		65%;
-}
-
 .tile-title {
-	display:	inline-block;
+	display:	block;
 	width:		100%;
 
 	margin:		auto auto;
 
 	text-align:	center;
 	font-size:	25px;
+
+	overflow:	hidden;
+	white-space:	nowrap;
+	text-overflow:	ellipsis;
 }
 
-/*.tile-add {
-	position:	absolute;
-	right:		-10%;
+.tile-text {
+	display:	inline-block;
+	width:		100%;
+	height:		0;
+	opacity:	0;
+	border:		0px solid black;
+
+	padding:	0 30px;
+
+	font-size:	20px;
+}
+
+.tile-text:focus {
+	outline:	0;
+}
+
+.tile-inactive {
+	/*
+	 * TODO: change this rule-of-thumb to something more solid?
+	 * Right now all inactive panels take in 10%, independant of the actual amount
+	 * 
+	 * */
 	width:		10%;
-	height:		100%;
+}
 
-	z-index:	1;
+.tile-active {
+	width:		65%;
+}
 
-	vertical-align:	middle;
-}*/
+.title-top {
+	margin-top:	0;
+	top:		0;
+}
 
 .float {
 	position:	absolute;
@@ -82,5 +105,6 @@ table.wrapper td:hover {
 
 	padding:	5px;
 
+	opacity:	0.6;
 	text-align:	right;
 }

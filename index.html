@@ -17,17 +17,32 @@
 	<body>
 		<table class="wrapper">
 			<tr data-bind="foreach: tiles">
-				<td class="tile animated" data-bind="css: 'color-' + $index(), click: $parent.activate($index)">
-					<span class="tile-title" data-bind="text: title">Something went wrong...</span>
+				<td class="tile animated" data-bind="
+					css: 'color-' + $index() + ' ' + ($parent.isActive($data) ? 'tile-active' : 'tile-inactive'),
+					click: $parent.activate
+				">
+					<span class="tile-title" data-bind="
+						text: title, 
+						css: {'title-top': ($parent.active() == $index())}">
+							Something went wrong...
+					</span>
+
+					<div class="tile-text animated" data-bind="
+						style: {height: $parent.active() == $index() ? '90%' : '0',
+							opacity: $parent.active() == $index() ? '1' : '0'}, 
+						attr: {'contenteditable': $parent.active() == $index() ? 'true' : 'false'}">
+							Type your text here
+					</div>
 				</td>
 			</tr>
 			<!--<div class="tile animated tile-inactive color-4 tile-add">
 				<span class="tile-title">+</span>
 			</div>-->
 		</table>
-		<div class="float text-color animated">
+		<div class="float text-color animated" data-bind="style: {opacity: (active() == '-1' ? '0.5': '0')}">
 			<div id="palette-author"></div>
 			<div>c - change color palette</div>
+			<div>a - add panel</div>
 		</div>
 	</body>
 </html>

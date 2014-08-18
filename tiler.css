@@ -64,7 +64,7 @@ table.wrapper td:hover {
 	font-size:	25px;
 }
 
-.tile-add {
+/*.tile-add {
 	position:	absolute;
 	right:		-10%;
 	width:		10%;
@@ -73,7 +73,7 @@ table.wrapper td:hover {
 	z-index:	1;
 
 	vertical-align:	middle;
-}
+}*/
 
 .float {
 	position:	absolute;
@@ -81,4 +81,6 @@ table.wrapper td:hover {
 	bottom:		0;
 
 	padding:	5px;
+
+	text-align:	right;
 }

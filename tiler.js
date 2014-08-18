@@ -5,68 +5,58 @@
  * 
  * */
 
-var palettes = ['colors03', 'platinum'];
-var current = 1;
-var tiles = [{
-	"title":		"Ideas",
-	"content":	"This is a tile for ideas"
+var palettes = ['platinum', 'colors03'];
+var current = 0;
+
+var data = [{
+	"title":	"Ideas",
+	"text":	"This is a tile for ideas"
 },{
-	"title":		"Notes",
-	"content":	"Write your notes here"
+	"title":	"Notes",
+	"text":	"Write your notes here"
 },{
-	"title":		"Todo",
-	"content":	"Things to do before completing this list"
+	"title":	"Todo",
+	"text":	"Things to do before completing this list"
 },{
-	"title":		"Dump",
-	"content":	"Dump your brain's content here"
+	"title":	"Dump",
+	"text":	"Dump your brain's content here"
 }];
 
 $(document).ready(function(){
-	/* Load color palette */
-	var loadPalette = function(name){
-		$.getJSON('colors/' + name + '.json', function(data){
-			// Assign colors
-			$.each(data.tiles, function(index, value){
-				$('.color-' + index).css('background-color',	data.tiles[index].bgColor);
-				$('.color-' + index).css('color',		(data.tiles[index].textColor ? data.tiles[index].textColor : '#FFFFFF'));
-			});
-			$('.bg-color').css('background-color',	data.bgColor);
-			$('.text-color').css('color',		data.textColor);
-		});
-	}
-
-	var init = function(){
-		loadPalette(palettes[current]);
-		$.each(tiles, function(index, value){
-			console.log('Adding ' + value);
-			$('.wrapper tr').append('<td class="tile animated tile-inactive color-' + index + '"><span class="tile-title">' + value.title + '</span></td>');
-		});
-	}
-
-	/* MIME type hack */
-	$.ajaxSetup({beforeSend: function(xhr){
-		if (xhr.overrideMimeType){
-			xhr.overrideMimeType("application/json");
-		}}
-	});
-
-	/* Load color palettes */
-	loadPalette(palettes[current]);
-
-	$('.wrapper tr td').last().hover(function(){
-		$('.tile-add').css('right', 0);
-	}, function(){
-		$('.tile-add').css('right', '-10%');
-	});
-
-	$('.tile').click(function(){
-		$('.tile').removeClass('tile-active').addClass('tile-inactive');
-		$(this).removeClass('tile-inactive').addClass('tile-active');
-	});
-
 	Mousetrap.bind('c',	function(){
-		loadPalette(palettes[(++current % palettes.length)]);
+		$('#css-palette').attr('href', 'colors/' + palettes[(++current % palettes.length)] + '.css');
+		$('#palette-author').show().fadeOut(2000);
 	});
+	$('#palette-author').fadeOut(2000);
 
-	init();
+	/* Knockout stuff */
+	function Tile(title, text){
+		var self = this;
+
+		self.title =	ko.observable(title);
+		self.text =	ko.observable(text);
+	};
+
+	function TileViewModel(){
+		var self = this;
+
+		self.tiles =	ko.observableArray();
+		self.active =	ko.observable(false);
+
+		self.palette =	ko.observable();
+
+		self.load = function(data){
+			$.each(data, function(index, value){
+				self.tiles.push(new Tile(value.title, value.text));
+			});
+		};
+
+		self.activate = function(index){
+			self.activate(index());
+		}
+	};
+
+	var tileViewModel = new TileViewModel();
+	tileViewModel.load(data);
+	ko.applyBindings(tileViewModel);
 });

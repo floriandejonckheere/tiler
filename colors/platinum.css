@@ -1,0 +1,38 @@
+/*
+ * Platinum The Trinity by Thgorn
+ * 
+ * */
+
+#palette-author:after {
+	content:		"Platinum The Trinity by Thgorn";
+}
+
+body, html {
+	background-color:	#F3C32D;
+	color:			#FFFFFF;
+}
+
+.color-0 {
+	background-color:	#F3C32D;
+	color:			#FFFFFF;
+}
+
+.color-1 {
+	background-color:	#F1D294;
+	color:			#FFFFFF;
+}
+
+.color-2 {
+	background-color:	#F58379;
+	color:			#FFFFFF;
+}
+
+.color-3 {
+	background-color:	#D9536F;
+	color:			#FFFFFF;
+}
+
+.color-4 {
+	background-color:	#CE74B3;
+	color:			#FFFFFF;
+}

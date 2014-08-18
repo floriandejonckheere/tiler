@@ -6,34 +6,28 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="tiler.css">
+		<link rel="stylesheet" type="text/css" href="colors/platinum.css" id="css-palette">
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nunito:300,700">
 		
-		<script type="text/JavaScript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script type="text/JavaScript" src="http://cdn.craig.is/js/mousetrap/mousetrap.min.js"></script>
+		<script type="text/JavaScript" src="dist/jquery-1.11.1.min.js"></script>
+		<script type="text/JavaScript" src="dist/knockout-3.1.0.js"></script>
+		<script type="text/JavaScript" src="dist/mousetrap.min.js"></script>
 		<script type="text/JavaScript" src="tiler.js"></script>
 	</head>
 	<body>
 		<table class="wrapper">
-			<tr>
-				<!--<td class="tile animated tile-inactive color-0">
-					<span class="tile-title">Notes</span>
+			<tr data-bind="foreach: tiles">
+				<td class="tile animated" data-bind="css: 'color-' + $index(), click: $parent.activate($index)">
+					<span class="tile-title" data-bind="text: title">Something went wrong...</span>
 				</td>
-				<td class="tile animated tile-inactive color-1">
-					<span class="tile-title">Notes</span>
-				</td>
-				<td class="tile animated tile-inactive color-2">
-					<span class="tile-title">Notes</span>
-				</td>
-				<td class="tile animated tile-inactive color-3">
-					<span class="tile-title">Notes</span>
-				</td>-->
 			</tr>
 			<!--<div class="tile animated tile-inactive color-4 tile-add">
 				<span class="tile-title">+</span>
 			</div>-->
 		</table>
 		<div class="float text-color animated">
-			c - change color palette
+			<div id="palette-author"></div>
+			<div>c - change color palette</div>
 		</div>
 	</body>
 </html>

@@ -1,0 +1,38 @@
+/*
+ * colors03 by eugeniabr85
+ * 
+ * */
+
+#palette-author:after {
+	content:		"colors03 by eugeniabr85";
+}
+
+body, html {
+	background-color:	#FFFFCC;
+	color:			#909090;
+}
+
+.color-0 {
+	background-color:	#FFFFCC;
+	color:			#6D6D6D;
+}
+
+.color-1 {
+	background-color:	#F0FECE;
+	color:			#6D6D6D;
+}
+
+.color-2 {
+	background-color:	#E96C8E;
+	color:			#EFEFEF;
+}
+
+.color-3 {
+	background-color:	#8FE5DB;
+	color:			#888888;
+}
+
+.color-4 {
+	background-color:	#3ED2C0;
+	color:			#FFFFFF;
+}

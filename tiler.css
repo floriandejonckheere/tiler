@@ -14,6 +14,9 @@ body,html {
 
 	font-family:	'Nunito', 'Source Sans Pro', sans-serif;
 	color:		white;
+
+	overflow-x:	hidden;
+	overflow-y:	hidden;
 }
 
 table {
@@ -35,7 +38,7 @@ table.wrapper td:hover {
 
 /* tiles */
 
-.tile {
+.animated {
 	transition:		all 0.5s ease;
 	-ms-transition:		all 0.5s ease;
 	-moz-transition:	all 0.5s ease;
@@ -63,11 +66,19 @@ table.wrapper td:hover {
 
 .tile-add {
 	position:	absolute;
-	right:		0;
+	right:		-10%;
 	width:		10%;
 	height:		100%;
 
 	z-index:	1;
 
 	vertical-align:	middle;
+}
+
+.float {
+	position:	absolute;
+	right:		0;
+	bottom:		0;
+
+	padding:	5px;
 }

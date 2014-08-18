@@ -1,7 +1,9 @@
 {
 	"title":	"Platinum The Trinity",
 	"author":	"Thgorn",
-	"colors": [{
+	"bgColor":	"#F3C32D",
+	"textColor":	"#FFFFFF",
+	"tiles": [{
 		"bgColor":	"#F3C32D"
 	},{
 		"bgColor":	"#F1D294"

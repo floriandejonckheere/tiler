@@ -1,7 +1,9 @@
 {
 	"title":	"textColors03",
 	"author":	"eugeniabr85",
-	"colors": [{
+	"bgColor":	"#FFFFCC",
+	"textColor":	"#909090",
+	"tiles": [{
 		"bgColor":	"#FFFFCC",
 		"textColor":	"#6D6D6D"
 	},{
@@ -12,7 +14,7 @@
 		"textColor":	"#EFEFEF"
 	},{
 		"bgColor":	"#8FE5DB",
-		"textColor":	"#F3F3F3"
+		"textColor":	"#888888"
 	},{
 		"bgColor":	"#3ED2C0",
 		"textColor":	"#FFFFFF"

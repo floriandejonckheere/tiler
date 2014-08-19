@@ -1,12 +1,3 @@
-/*
- * colors03 by eugeniabr85
- * 
- * */
-
-#palette-author:after {
-	content:		"colors03 by eugeniabr85";
-}
-
 body, html {
 	background-color:	#FFFFCC;
 	color:			#909090;

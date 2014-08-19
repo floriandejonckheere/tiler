@@ -18,7 +18,7 @@
 		<table class="wrapper">
 			<tr data-bind="foreach: tiles">
 				<td class="tile animated" data-bind="
-					css: 'color-' + $index() + ' ' + ($parent.isActive($data) ? 'tile-active' : 'tile-inactive'),
+					css: 'color-' + ($index() % color_max) + ' ' + ($parent.isActive($data) ? 'tile-active' : 'tile-inactive'),
 					click: $parent.activate
 				">
 					<span class="tile-title" data-bind="
@@ -41,6 +41,8 @@
 		</table>
 		<div class="float text-color animated" data-bind="style: {opacity: (active() == '-1' ? '0.5': '0')}">
 			<div id="palette-author"></div>
+			<div>s - save</div>
+			<div>l - load</div>
 			<div>c - change color palette</div>
 			<div>a - add panel</div>
 		</div>

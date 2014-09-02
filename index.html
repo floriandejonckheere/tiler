@@ -23,26 +23,20 @@
 				">
 					<span class="tile-title" data-bind="
 						text: title, 
-						css: {'title-top': ($parent.active() == $index())}">
-							Something went wrong...
-					</span>
+						css: {'title-top': ($parent.active() == $index())},
+						attr: { 'contenteditable': ($parent.active() == $index() ? 'true': 'false')}">Something went wrong...</span>
 
-					<div class="tile-text animated" data-bind="
-						style: {height: $parent.active() == $index() ? '90%' : '0',
-							opacity: $parent.active() == $index() ? '1' : '0'}, 
-						attr: {'contenteditable': $parent.active() == $index() ? 'true' : 'false'}">
-							Type your text here
-					</div>
+					<div class="tile-text animated" contenteditable data-bind="
+						html: text
+					">Type your text here</div>
 				</td>
 			</tr>
-			<!--<div class="tile animated tile-inactive color-4 tile-add">
-				<span class="tile-title">+</span>
-			</div>-->
 		</table>
 		<div class="float text-color animated" data-bind="style: {opacity: (active() == '-1' ? '0.5': '0')}">
 			<div id="palette-author"></div>
 			<div>s - save</div>
 			<div>l - load</div>
+			<div>r - reset</div>
 			<div>c - change color palette</div>
 			<div>a - add panel</div>
 		</div>

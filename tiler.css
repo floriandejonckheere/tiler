@@ -11,6 +11,7 @@ body,html {
 	margin:		0;
 
 	height:		100%;
+	width:		100%;
 
 	font-family:	'Nunito', 'Source Sans Pro', sans-serif;
 	color:		white;
@@ -67,16 +68,16 @@ table.wrapper td:hover {
 .tile-text {
 	display:	inline-block;
 	width:		100%;
+	min-height:	0;
 	height:		0;
 	opacity:	0;
-	border:		1px solid black;
 
 	padding:	0 30px;
 
 	font-size:	20px;
 }
 
-.tile-text:focus {
+:focus {
 	outline:	0;
 }
 
@@ -91,6 +92,12 @@ table.wrapper td:hover {
 
 .tile-active {
 	width:		65%;
+}
+
+.tile-active .tile-text {
+	height:		90%;
+	min-height:	90%;
+	opacity:	1;
 }
 
 .title-top {

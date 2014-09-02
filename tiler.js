@@ -10,9 +10,6 @@ var current = 0;
 // TODO: solve palette data problem
 var color_max = 5;
 
-// TODO: fancy names for new panels
-var titles = ['Panel', 'Paper', 'Sheet'];
-
 var data = [{
 	"title":	"Ideas",
 	"text":	"This is a tile for ideas"
@@ -27,6 +24,8 @@ var data = [{
 	"text":	"Dump your brain's content here"
 }];
 
+if(!localStorage["data"]) localStorage["data"] = JSON.stringify(data);
+
 $(document).ready(function(){
 	$('#palette-author').fadeOut(2000);
 
@@ -36,6 +35,9 @@ $(document).ready(function(){
 
 		self.title =	ko.observable(title);
 		self.text =	ko.observable(text);
+		self.text.subscribe(function(value){
+			console.log('Updated value: ' + value);
+		});
 	};
 
 	function TileViewModel(){
@@ -50,10 +52,6 @@ $(document).ready(function(){
 			});
 		};
 
-		self.clear = function(){
-			self.tiles.removeAll();
-		}
-
 		self.activate = function(element){
 			// This is not really good for performance
 			self.active(self.tiles.indexOf(element));
@@ -64,21 +62,32 @@ $(document).ready(function(){
 				return true;
 			return false;
 		};
+
+		self.exportData = function(){
+			return ko.toJSON(self.tiles());
+		};
+
+		self.importData = function(data){
+			self.tiles.removeAll();
+			self.add(JSON.parse(data));
+		};
+
+		self.tiles.subscribe(function(newTiles){
+			localStorage["data"] = self.exportData();
+		});
+
 	};
 
 	var tileViewModel = new TileViewModel();
-	tileViewModel.add(data);
+	tileViewModel.importData(localStorage["data"]);
 	ko.applyBindings(tileViewModel);
-
-	// For some reason the last panel is activated on load without this line
-	//tileViewModel.activate(-1); // NOW it doesn't anymore
 
 	Mousetrap.bind('c',	function(){
 		if(tileViewModel.active() == -1){
 			var basePath = 'colors/' + palettes[(++current % palettes.length)];
 			$('#css-palette').attr('href', basePath + '.css');
 			$.getJSON(basePath + '.json', function(data){
-				$('#palette-author').html(data.title + ' by ' + data.author);
+				$('#palette-author').html(data.title + ' by ' + localdata.author);
 				color_max = data.colors;
 				$('#palette-author').show().fadeOut(2000);
 			});
@@ -88,40 +97,49 @@ $(document).ready(function(){
 	Mousetrap.bind('a',	function(){
 		if(tileViewModel.active() == -1){
 			tileViewModel.add([{
-				"title":	titles[Math.floor(Math.random()*titles.length)],
-				"text":		""
+				"title":	'New tile',
+				"text":		"Scribble away"
 			}]);
-			// Same hack here
-			//tileViewModel.active(-1);
 		}
 	});
 
 	// Overwrite callback when an input field is focused
 	Mousetrap.stopCallback = function(e, element, combo){ return false; };
 	Mousetrap.bind('esc',	function(){
+		// Update fields, should _really_ be done with a knockout binding
+		var el = $('.tile').eq(tileViewModel.active());
+		tileViewModel.tiles()[tileViewModel.active()].title(el.find('.tile-title').html());
+		tileViewModel.tiles()[tileViewModel.active()].text(el.find('.tile-text').html());
+
+		// Export data to localStorage
+		console.log('Exporting data');
+		localStorage["data"] = tileViewModel.exportData();
+		console.log(localStorage["data"]);
+
+		// Blur tile
 		tileViewModel.active(-1);
+		$('.tile-title').blur();
 	});
 
 	Mousetrap.bind('s',	function(){
 		if(tileViewModel.active() == -1){
-			// This should probably be a ko mapping
-			var exportData = [];
-			$(tileViewModel.tiles()).each(function(index, value){
-				exportData.push({
-					"title":	value.title(),
-					"text":		value.text()
-				});
-			});
-			window.prompt('Copy your data here', JSON.stringify(exportData));
+			window.prompt('Copy your data here', tileViewModel.exportData());
 		}
 	});
 
 	Mousetrap.bind('l',	function(){
 		if(tileViewModel.active() == -1){
-			var importData = $.parseJSON(window.prompt('Paste your data here'));
-			tileViewModel.clear();
-			console.log(importData);
-			tileViewModel.add(importData);
+			var importData = window.prompt('Paste your data here');
+			if(JSON.parse(importData)) tileViewModel.importData(importData);
+		}
+	});
+
+	Mousetrap.bind('r',	function(){
+		if(tileViewModel.active() == -1){
+			if(window.confirm('Are you sure you wish to erase all tiles?') == true){
+				localStorage["data"] = JSON.stringify(data);
+				tileViewModel.importData(localStorage["data"]);
+			}
 		}
 	});
 });
